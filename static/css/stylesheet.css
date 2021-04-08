@@ -1,0 +1,65 @@
+<div class="navbar" style="margin-top: 3px;
+                               height: 25px;
+                               background-color: grey;">
+    <ul style="display: inline; ">
+	    <li style="display: inline;  "><a style="background-color: grey;
+                                                 padding: 1px;
+                                                 color: black;
+                                                 text-decoration: none;" href="">HOME</a></li>
+	    <li style="display: inline;  "><a style="background-color: grey;
+                                                 padding: 1px;
+                                                 color: black;
+                                                 text-decoration: none;" href="">OTHER</a></li>
+
+
+    </ul>
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+             {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <div class="main" style="padding: 70px; ">
+       <form method="POST" action="">
+          {{ form.hidden_tag() }}
+          <fieldset class="entries">
+          <legend class="top" style="font-size: 70px; font-color: red;"> CONTACT FORM </legend>
+          <div class="fns">
+             {{ form.fn.label(class="first") }}
+             {{ form.fn }}
+          </div>
+          <br>
+              <br>
+          <div class="lns">
+             {{ form.ln.label(class="last") }}
+             {{ form.ln }}
+          </div>
+              <br>
+              <br>
+          <div class="es">
+             {{ form.email.label(class="ess") }}
+             {{ form.email }}
+          </div>
+              <br>
+              <br>
+          <div class="tels">
+             {{ form.tel.label(class="telss") }}
+             {{ form.tel }}
+          </div>
+              <br>
+              <br>
+              <br>
+              <br>
+           <div class="sbs">
+              {{ form.submit }}
+          </div>
+
+
+          </fieldset>
+       </form>
+    </div>

@@ -1,0 +1,66 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="col-md-3"></div>
+
+
+<div class="col-md-6">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+             {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    <div class="content-section" style=" background-color: #fff;">
+       <form method="POST" action="">
+          {{ form.hidden_tag() }}
+          <fieldset class="entries">
+          <legend class="border-bottom mb-4" style="font-size:50px;" > CONTACT FORM </legend>
+          <div class="form-group">
+             {{ form.fn.label(class="form-control-label") }}
+             {{ form.fn(class="form-control form-control-lg") }}
+          </div>
+          <br>
+              <br>
+          <div class="form-group">
+             {{ form.ln.label(class="form-control-label") }}
+             {{ form.ln(class="form-control form-control-lg") }}
+          </div>
+              <br>
+              <br>
+          <div class="form-group">
+             {{ form.email.label(class="form-control-label") }}
+             {{ form.email(class="form-control form-control-lg") }}
+          </div>
+              <br>
+              <br>
+          <div class="form-group">
+             {{ form.tel.label(class="form-control-label") }}
+             {{ form.tel(class="form-control form-control-lg") }}
+          </div>
+              <br>
+
+          </fieldset>
+           <div class="form-group">
+              {{ form.submit(class="btn btn-outline-info") }}
+          </div>
+       </form>
+    </div>
+</div>
+
+<div class="col-md-3"></div>
+
+<p> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <i>Fill the given form to create a new contact!</i> </p>
+
+{% endblock content %}
+
+
+
+
+
+
+
+

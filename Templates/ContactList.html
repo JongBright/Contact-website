@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+{% block content %}
+
+
+<div class="well"> EXISTING CONTACTS </div>
+<div class="container">
+        <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>FULL NAME</th>
+                <th>EMAIL</th>
+                <th>PHONE</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for row in contacts %}
+            <tr>
+                <td>{{ row.0 }}  {{ row.1 }}</td>
+                <td>{{ row.2 }}</td>
+                <td>{{ row.3 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+
+        </table>
+</div>
+
+{% endblock content %}
+
+
+
