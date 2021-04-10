@@ -62,21 +62,22 @@ def third_page():
         desc3 = str(form2.email2.data)
     if form2.validate_on_submit():
         def outof_MyDatabase():
+
             contacts = []
+
+            #getting contact emails from contact database
             mycursor.execute("SELECT Email FROM contacts")
             info = mycursor.fetchall()
 
+            #marching the contact email to the required contact and deleting from database
             for contact in info:
                 contacts.append(contact)
             if desc3 not in contact:
                 flash(f'{form2.fn2.data} {form2.ln2.data}! is not an existing Contact')
-
             else:
                 mycursor.execute("DELETE FROM contacts WHERE First_Name = %s and Last_Name = %s and Email = %s", (desc1, desc2, desc3, ))
                 db.commit()
                 flash(f'{form2.fn2.data} {form2.ln2.data}! DELETED!', 'success')
-
-
 
 
         outof_MyDatabase()
