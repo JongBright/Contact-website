@@ -1,6 +1,8 @@
 {% extends "index.html" %}
 {% block content %}
 
+
+
 <div class="col-md-3"></div>
 
 
@@ -18,49 +20,40 @@
        <form method="POST" action="">
           {{ form.hidden_tag() }}
           <fieldset class="entries">
-          <legend class="border-bottom mb-4" style="font-size:50px;" > REGISTRATION FORM </legend>
+          <legend class="border-bottom mb-4" style="font-size:50px;" > DELETION FORM </legend>
           <div class="form-group">
-             {{ form.fn.label(class="form-control-label") }}
-             {{ form.fn(class="form-control form-control-lg") }}
+             {{ form.fn2.label(class="form-control-label") }}
+             {{ form.fn2(class="form-control form-control-lg") }}
           </div>
           <br>
               <br>
           <div class="form-group">
-             {{ form.ln.label(class="form-control-label") }}
-             {{ form.ln(class="form-control form-control-lg") }}
+             {{ form.ln2.label(class="form-control-label") }}
+             {{ form.ln2(class="form-control form-control-lg") }}
           </div>
               <br>
               <br>
           <div class="form-group">
-             {{ form.email.label(class="form-control-label") }}
-             {{ form.email(class="form-control form-control-lg") }}
-          </div>
-              <br>
-              <br>
-          <div class="form-group">
-             {{ form.tel.label(class="form-control-label") }}
-             {{ form.tel(class="form-control form-control-lg") }}
+             {{ form.email2.label(class="form-control-label") }}
+             {{ form.email2(class="form-control form-control-lg") }}
           </div>
               <br>
 
           </fieldset>
            <div class="form-group">
-              {{ form.submit(class="btn btn-outline-info") }}
+              {{ form.submit2(class="btn btn-outline-info") }}
           </div>
        </form>
     </div>
 </div>
 
+<p> Enter user first name, last name and email </p>
+
 <div class="col-md-3"></div>
 
-<p> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <i>Fill the given form to create a new contact!</i> </p>
+
+
+
+
 
 {% endblock content %}
-
-
-
-
-
-
-
-
