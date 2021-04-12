@@ -7,10 +7,5 @@ class Create(FlaskForm):
     fn = StringField("First Name: ", validators=[DataRequired(), length(min=2, max=10)])
     ln = StringField("Last Name: ", validators=[DataRequired(), length(min=2, max=10)])
     email = StringField("Email: ", validators=[DataRequired(), Email()])
-    tel = StringField("Phone: ", validators=[DataRequired(), length(min=7, max=20)])
+    tel = StringField("Phone: ", validators=[DataRequired(), length(min=7, max=25)])
     submit = SubmitField("Done")
-
-
-
-
-

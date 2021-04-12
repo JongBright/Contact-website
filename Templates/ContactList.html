@@ -2,7 +2,7 @@
 {% block content %}
 
 
-<div class="well"> EXISTING CONTACTS </div>
+<div class="well"> <b>EXISTING CONTACTS</b> </div>
 <div class="container">
         <table class="table table-striped">
         <thead>
@@ -10,6 +10,7 @@
                 <th>FULL NAME</th>
                 <th>EMAIL</th>
                 <th>PHONE</th>
+                <th>ACTION</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,9 @@
                 <td>{{ row.0 }}  {{ row.1 }}</td>
                 <td>{{ row.2 }}</td>
                 <td>{{ row.3 }}</td>
+                <td width="130">
+                    <a href="/delete/{{row.2}}" class="btn btn-danger btn-delete btn-sm"> delete </a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>

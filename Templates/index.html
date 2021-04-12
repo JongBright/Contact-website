@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </head>
 <body style="overflow: scroll; background-image: url('bg.png');">
@@ -28,7 +28,6 @@
             <ul class="nav navbar-nav">
                     <li class="active"><a href="{{ url_for('first_page') }}"> Home </a> </li>
                     <li><a href="{{ url_for('second_page') }}"> Contacts </a> </li>
-                    <li><a href="{{ url_for('third_page') }}"> DeleteContact </a> </li>
             </ul>
         </div>
     </div>
@@ -37,6 +36,20 @@
 
         {% block content %} {% endblock %}
     </div>
+
+<script>
+const btnDelete = document.querySelectorAll('.btn-delete');
+if(btnDelete)  {
+    const btnArray = Array.from(btnDelete);
+    btnArray.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        if(!confirm('Are you sure you want to delete this contact?')){
+        e.preventDefault();
+        }
+      });
+    });
+}
+</script>
 
 </body>
 </html>
