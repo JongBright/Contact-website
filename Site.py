@@ -1,18 +1,21 @@
 from flask import Flask, render_template, url_for, flash, redirect, request
 from form import Create
 import mysql.connector
+from flask_mysqldb import MySQL
+
 
 
 #creating an instance of the Flask framework and setting website secret key
 app = Flask(__name__)
 app.config["SECRET_KEY"] = ("a"*32)
 
-#Creating a MySQL database
-db = mysql.connector.connect(host="localhost", user="root", passwd="brightai", database="contactweb ")
-mycursor = db.cursor()
+#Initializing MySQL database
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'brightai'
+app.config['MYSQL_DB'] = 'contactweb'
 
-#mycursor.execute("CREATE DATABASE contactweb")
-#mycursor.execute("CREATE TABLE contacts (First_Name VARCHAR(255), Last_Name VARCHAR(255), Email VARCHAR(255), Phone INTEGER(20))")
+db = MySQL(app)
 
 
 #routing the website pages
@@ -36,30 +39,70 @@ def first_page():
 
             #Creating a table to store gotten data from the website to the database
             sql_formula = "INSERT INTO contacts (First_Name, Last_Name, Email, Phone) VALUES (%s, %s, %s, %s)"
+            mycursor = db.connection.cursor()
             mycursor.execute(sql_formula, contact)
-            db.commit()
+            db.connection.commit()
 
         into_MyDatabase()
 
-        #return redirect(url_for('first_page'))
     return render_template("CreateContact.html", form=form)
-
 
 @app.route("/contact list")
 def second_page():
 
     #Retrieving the required data from the database
+    mycursor = db.connection.cursor()
     mycursor.execute("SELECT * FROM contacts")
     info = mycursor.fetchall()
     #mycursor.close()
 
     return render_template("ContactList.html", contacts=info)
 
-@app.route("/delete/<string:id>", methods=["GET", "POST"])
+
+
+@app.route("/delete contact/<string:id>", methods=["GET", "POST"])
 def third_page(id):
 
-    mycursor.execute('DELETE FROM contacts_table WHERE Email = (%s) ', (id, ))
-    db.commit()
+    mycursor = db.connection.cursor()
+    mycursor.execute('DELETE FROM contacts WHERE Email = (%s) ', (id, ))
+    db.connection.commit()
+
+    return redirect(url_for('second_page'))
+
+
+@app.route("/edit contact/<string:id>", methods=["GET", "POST"])
+def fourth_page(id):
+
+    mycursor = db.connection.cursor()
+    mycursor.execute("SELECT * FROM contacts WHERE Email = (%s)", (id, ))
+    info = mycursor.fetchall()
+
+    return render_template("UpdateContact.html", contact=info[0])
+
+
+@app.route("/update contact/<string:id>", methods=["POST", "GET"])
+def fifth_page(id):
+
+    #Getting data from the edit form
+    if request.method == 'POST':
+            f_name = request.form['First_Name']
+            l_name = request.form['Last_Name']
+            email = request.form['Email']
+            tel = request.form['Phone']
+
+    #Applying the contact update using the gotten data
+            mycursor = db.connection.cursor()
+            mycursor.execute("""
+            UPDATE contacts
+            SET First_Name = %s, Last_Name = %s, Email = %s, Phone = %s
+            WHERE Email = %s
+
+
+            """, (f_name, l_name, email, tel, id))
+
+            db.connection.commit()
+            #flash(f'Contact UPDATED successfully!', 'success')
+
 
     return redirect(url_for('second_page'))
 

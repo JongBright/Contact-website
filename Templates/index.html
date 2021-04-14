@@ -50,6 +50,28 @@ if(btnDelete)  {
     });
 }
 </script>
+<script>
+const btnEdit = document.querySelectorAll('.btn-edit');
+if(btnDelete)  {
+    const btnArray = Array.from(btnEdit);
+    btnArray.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        if(!confirm('Are you sure you want to update this contact?')){
+        e.preventDefault();
+        }
+      });
+    });
+}
+</script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+

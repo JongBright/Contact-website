@@ -10,7 +10,7 @@
                 <th>FULL NAME</th>
                 <th>EMAIL</th>
                 <th>PHONE</th>
-                <th>ACTION</th>
+                <th> &nbsp&nbsp&nbsp&nbsp&nbsp ACTION</th>
             </tr>
         </thead>
         <tbody>
@@ -20,8 +20,9 @@
                 <td>{{ row.0 }}  {{ row.1 }}</td>
                 <td>{{ row.2 }}</td>
                 <td>{{ row.3 }}</td>
-                <td width="130">
-                    <a href="/delete/{{row.2}}" class="btn btn-danger btn-delete btn-sm"> delete </a>
+                <td width="150">
+                    <a href="/edit contact/{{row.2}}" class="btn btn-secondary btn-edit btn-sm" style="background-color: yellow; width: 55px; height: 30px;"> edit </a>
+                    <a href="/delete contact/{{row.2}}" class="btn btn-danger btn-delete btn-sm"> delete </a>
                 </td>
             </tr>
             {% endfor %}
