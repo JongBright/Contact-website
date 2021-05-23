@@ -1,9 +1,12 @@
-from flask import Flask, render_template, url_for, flash, redirect, request
+from flask import Flask, render_template, url_for, flash, redirect, request, jsonify
 from form import Create
 import mysql.connector
 from flask_mysqldb import MySQL
 
 
+#mydb = mysql.connector.connect(host="localhost", user="root", passwd="brightai", database="ContactWeb")
+#temp_cursor = mydb.cursor()
+#temp_cursor.execute("CREATE TABLE Contacts (First_Name VARCHAR(255), Last_Name VARCHAR(255), Email VARCHAR(255), Phone INTEGER(10))")
 
 #creating an instance of the Flask framework and setting website secret key
 app = Flask(__name__)
@@ -13,7 +16,7 @@ app.config["SECRET_KEY"] = ("a"*32)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'brightai'
-app.config['MYSQL_DB'] = 'contactweb'
+app.config['MYSQL_DB'] = 'ContactWeb'
 
 db = MySQL(app)
 
@@ -32,16 +35,27 @@ def first_page():
         def into_MyDatabase():
 
             temp = []
+            emails = []
+            tels = []
             for value in required.values():
                 if len(value)<30 and value!="Done":
                     temp.append(value)
             contact = tuple(temp)
 
-            #Creating a table to store gotten data from the website to the database
-            sql_formula = "INSERT INTO contacts (First_Name, Last_Name, Email, Phone) VALUES (%s, %s, %s, %s)"
+            #filtering the data and storing to the database table
             mycursor = db.connection.cursor()
-            mycursor.execute(sql_formula, contact)
-            db.connection.commit()
+            mycursor.execute('SELECT Email FROM contacts')
+            emails_info = mycursor.fetchall()
+            for email in emails_info:
+                emails.append(email[0])
+            mycursor.execute('SELECT Phone FROM contacts')
+            tels_info = mycursor.fetchall()
+            for tel in tels_info:
+                tels.append(tel[0])
+            if (contact[2] not in emails) and (contact[3] not in tels):
+                sql_formula = "INSERT INTO contacts (First_Name, Last_Name, Email, Phone) VALUES (%s, %s, %s, %s)"
+                mycursor.execute(sql_formula, contact)
+                db.connection.commit()
 
         into_MyDatabase()
 
