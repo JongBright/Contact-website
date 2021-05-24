@@ -1,0 +1,15 @@
+
+-Any Python IDE ( Preferably Pycharm: latest version)
+-Python 						          version = 3.7 and above
+-Python flask module                                              version = 1.1.1
+-Python flask_mysqldb module 
+-Python flask_wtf module					  version = 0.14.3
+-Python wtforms ( and wtforms.validators ) module                 version = 2.3.3
+-Bootstrap:                                              
+ *links (icluded to head of index.html) = <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+         				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+         				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+
+-MySQL database ( and MySQl workbench )                           version = 8.0.23.0
+-Python mysql.connector module			                  version = 8.0.23

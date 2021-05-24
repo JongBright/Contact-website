@@ -12,7 +12,4 @@ class Create(FlaskForm):
     submit = SubmitField("Done")
 
 
-#j = jb.cursor()
-#j.execute("DROP TABLE contacts")
-#jb.commit()
 
